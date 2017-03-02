@@ -65,6 +65,12 @@ describe Her::Model::Attributes do
       expect(@new_user.get_attribute(:unknown_method_for_a_user)).to be_nil
       expect(@new_user.get_attribute(:'life-span')).to eq("3 years")
     end
+
+    it "handles attribute_changed_in_place?" do
+      @new_user = Foo::User.new
+      @new_user.fullname = 'Schmoo'
+      @new_user.attribute_changed_in_place?(:fullname).should be_truthy
+    end
   end
 
   context "assigning new resource data" do
